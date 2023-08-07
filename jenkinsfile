@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout GIT') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: 'main']],
+                    userRemoteConfigs: [[url: 'https://github.com/gaichesamar/covoiturage_backend_cqrs_devops.git', credentialsId: '2e9b2d12-d341-4aee-adcf-d7bc186407cb']]
+                ])
+            }
+        }
+         stage('Build compteuser ') {
+                                            steps {
+                                                dir('user_keycloak-master') {
+                                                    sh 'mvn clean compile package'
+                                                    sh 'mvn sonar:sonar   -Dsonar.projectKey=Api-gateway -Dsonar.host.url=http://localhost:9000 -Dsonar.login=ed2e81b29f1b3f6ff5320459e72ab510fb107c1a '
+                                                    sh 'docker build -t samargaichee/compteuser-1.0.0.jar .'
+                                                    sh 'docker login -u samargaichee -p Samar2021'
+                                                    sh 'mvn org.owasp:dependency-check-maven:check'
+                                                    archiveArtifacts(artifacts: 'target/dependency-check-report.html', fingerprint: true)
+
+
+                                                }
+                                            }
+                                        }
+
+                                        stage('Build reclamation-master  microservice') {
+                                              steps {
+                                                 dir('reclamation-master') {
+                                                    sh 'mvn clean compile package'
+                                                    sh 'mvn test'
+                                                    sh 'docker build -t samargaichee/reclamation-1.0.0.jar  .'
+                                                    sh 'docker login -u samargaichee -p Samar2021'
+                                                    sh 'mvn org.owasp:dependency-check-maven:check'
+                                                    archiveArtifacts(artifacts: 'target/dependency-check-report.html', fingerprint: true)
+
+
+                                                                                       }
+                                                                                      }
+                                                                                      }
+                                          stage('Build W2GO  microservice') {
+                                                                                    steps {
+                                                                                        dir('W2GO') {
+                                                                                        sh 'mvn clean compile package'
+                                                                                        sh 'mvn test'
+                                                                                        sh 'docker build -t samargaichee/paypal-1.0.0.jar  .'
+                                                                                        sh 'docker login -u samargaichee -p Samar2021'
+                                                                                        sh 'mvn org.owasp:dependency-check-maven:check'
+                                                                                        archiveArtifacts(artifacts: 'target/dependency-check-report.html', fingerprint: true)
+
+
+                                                                                                            }
+                                                                                                           }
+                                                                                                           }
+
+
+
+
+    }
+}
