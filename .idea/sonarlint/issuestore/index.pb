@@ -7,8 +7,6 @@ J
 BackReservation/Dockerfile,f/d/fda582d064558efc9cf460f713df8f9cdeac0eb8
 `
 0Aoi-gateway/prometheus-2.30.3.linux-amd64.tar.gz,b/1/b1d8961255236a5f246cc47b662adacae98d0064
-C
-Aoi-gateway/pom.xml,c/1/c101e9fc5d751a5a802e28fbaa18f65ab775711e
 J
 Aoi-gateway/prometheus.yml,2/f/2f3363663ec042b85a3a452906ed9493378835d7
 F

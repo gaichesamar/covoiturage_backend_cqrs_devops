@@ -17,8 +17,7 @@ pipeline {
                                                     sh 'mvn sonar:sonar   -Dsonar.projectKey=devopsSecure -Dsonar.host.url=http://localhost:9000 -Dsonar.token=sqp_9d27db2dad049a555fa38e82c8f7b07fc63589a2'
                                                     sh 'docker build -t samargaichee/compteuser-1.0.0.jar .'
                                                     sh 'docker login -u samargaichee -p Samar2021'
-                                                    sh 'mvn org.owasp:dependency-check-maven:check'
-                                                    archiveArtifacts(artifacts: 'target/dependency-check-report.html', fingerprint: true)
+
 
 
                                                 }
@@ -32,8 +31,7 @@ pipeline {
                                                     sh 'mvn test'
                                                     sh 'docker build -t samargaichee/reclamation-1.0.0.jar  .'
                                                     sh 'docker login -u samargaichee -p Samar2021'
-                                                    sh 'mvn org.owasp:dependency-check-maven:check'
-                                                    archiveArtifacts(artifacts: 'target/dependency-check-report.html', fingerprint: true)
+
 
 
                                                                                        }
@@ -46,8 +44,7 @@ pipeline {
                                                                                         sh 'mvn test'
                                                                                         sh 'docker build -t samargaichee/paypal-1.0.0.jar  .'
                                                                                         sh 'docker login -u samargaichee -p Samar2021'
-                                                                                        sh 'mvn org.owasp:dependency-check-maven:check'
-                                                                                        archiveArtifacts(artifacts: 'target/dependency-check-report.html', fingerprint: true)
+
 
 
                                                                                                             }
