@@ -34,6 +34,7 @@ pipeline {
 
 
 
+
                                                                                        }
                                                                                       }
                                                                                       }
@@ -56,6 +57,22 @@ pipeline {
 
 
 
+     stage('Push Docker Images') {
+            steps {
+                script {
+                    sh 'docker login -u samargaichee -p Samar2021'
+                    sh 'docker push samargaichee/compteuser-1.0.0.jar'
+                    sh 'docker push samargaichee/reclamation-1.0.0.jar'
+                    sh 'docker push samargaichee/paypal-1.0.0.jar'
+                    sh 'docker push samargaichee/servicediscovery-1.0.0.jar'
+                    sh 'docker push samargaichee/voiture-1.0.0.jar'
+                    sh 'docker push samargaichee/org.oga-1.0.0.jar'
+                    sh 'docker push samargaichee/aoi-gateway-1.0.0.jar
+'
 
+
+                }
+            }
+        }
     }
 }
