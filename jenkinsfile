@@ -67,8 +67,7 @@ pipeline {
                     sh 'docker push samargaichee/servicediscovery-1.0.0.jar'
                     sh 'docker push samargaichee/voiture-1.0.0.jar'
                     sh 'docker push samargaichee/org.oga-1.0.0.jar'
-                    sh 'docker push samargaichee/aoi-gateway-1.0.0.jar
-'
+                    sh 'docker push samargaichee/aoi-gateway-1.0.0.jar'
 
 
                 }
